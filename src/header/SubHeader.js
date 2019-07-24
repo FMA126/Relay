@@ -5,10 +5,10 @@ import { Nav } from 'react-bootstrap'
 const authenticatedOptionsResource = (
   <React.Fragment>
     <Nav.Item>
-      <Nav.Link href="#books">All Books</Nav.Link>
+      <Nav.Link href="#quotes">All Quotes</Nav.Link>
     </Nav.Item>
     <Nav.Item>
-      <Nav.Link href="#create-book">Create A Book</Nav.Link>
+      <Nav.Link href="#create-quote">Create A Quote</Nav.Link>
     </Nav.Item>
   </React.Fragment>
 )

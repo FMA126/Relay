@@ -3,17 +3,16 @@ import { Redirect, withRouter, Link } from 'react-router-dom'
 import { Media, Button } from 'react-bootstrap'
 import axios from 'axios'
 
-import sampleBook from './sampleBook.jpg'
 import Layout from './Layout'
 import apiUrl from '../apiConfig'
 
 // import Layout from '../shared/Layout'
 
-class Book extends Component {
+class Quote extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      book: null,
+      quote: null,
       error: null,
       deleted: false
     }
@@ -22,7 +21,7 @@ class Book extends Component {
   async componentDidMount () {
     try {
       const response = await axios({
-        url: apiUrl + '/books' + `/${this.props.match.params.id}`,
+        url: apiUrl + '/quotes' + `/${this.props.match.params.id}`,
         method: 'GET',
         headers: {
           'Authorization': `Token token=${this.props.user.token}`
@@ -33,9 +32,9 @@ class Book extends Component {
         day: 'numeric',
         year: 'numeric'
       }
-      const dateObj = new Date(response.data.book.firstPublished)
+      const dateObj = new Date(response.data.quote.firstPublished)
       const formattedDate = dateObj.toLocaleDateString(undefined, options)
-      this.setState({ book: { ...response.data.book, firstPublished: formattedDate }, loaded: true })
+      this.setState({ quote: { ...response.data.quote, firstPublished: formattedDate }, loaded: true })
     } catch (err) {
       console.error(err)
       this.setState({ error: err.message })
@@ -43,37 +42,37 @@ class Book extends Component {
   }
 
   destroy = () => {
-    // can also do axios.delete(`${apiUrl}/books/${this.props.match.params.id}`)
+    // can also do axios.delete(`${apiUrl}/quotes/${this.props.match.params.id}`)
     axios({
-      url: `${apiUrl}/books/${this.props.match.params.id}`,
+      url: `${apiUrl}/quotes/${this.props.match.params.id}`,
       method: 'DELETE',
       headers: {
         'Authorization': `Token token=${this.props.user.token}`
       }
     })
       .then(() => this.setState({ deleted: true }))
-      .then(() => this.props.alert('Deleted book!', 'warning'))
+      .then(() => this.props.alert('Deleted quote!', 'warning'))
       .catch(err => this.setState({ error: err.message }))
   }
 
   render () {
-    const { book, error, deleted } = this.state
+    const { quote, error, deleted } = this.state
     const { user } = this.props
     const ownerButtons = (
       <div>
         <Button onClick={this.destroy} className='mr-2' variant='danger'>Delete</Button>
-        <Link to={`/books/${this.props.match.params.id}/update-book`}><Button>Edit</Button></Link>
+        <Link to={`/quotes/${this.props.match.params.id}/update-quote`}><Button>Edit</Button></Link>
       </div>
     )
 
     if (deleted) {
       // custom object in Redirect. 'state' can be named something else
-      return <Redirect to='/books' />
+      return <Redirect to='/quotes' />
     }
     if (error) {
       return <p>ERROR: {error}</p>
     }
-    if (!book) {
+    if (!quote) {
       return <p>Loading...</p>
     }
 
@@ -84,16 +83,17 @@ class Book extends Component {
             width={64}
             height={64}
             className="mr-3"
-            src={sampleBook}
+            src={'nothing'}
             alt="Generic placeholder"
           />
           <Media.Body>
-            <h2>{book.title}</h2>
-            <h4>{book.author}</h4>
-            <p>Langauge: {book.originalLanguage}</p>
-            <p>Date Published: {book.firstPublished}</p>
-            <p>Posted by: {book.owner}</p>
-            {user && user._id === book.owner ? ownerButtons : <p>Not editable</p>}
+            <h2>{`${quote.pickUpLocation} to ${quote.dropOffLocation}`}</h2>
+            <h4>{quote.pickUpDate}</h4>
+            <p>Date Quoted: {quote.createdAt.slice(0, 10)}</p>
+            <p>Uhaul Prices: {quote.prices[0] ? quote.prices[0].uhaul.tenFootTruck : 'no price info'}</p>
+            <p>Budget Prices: {quote.prices[1] ? quote.prices[1].budget.twelveFootTruck : 'no price info'}</p>
+            <p>Penske Prices: {quote.prices[2] ? quote.prices[2].penske.twelveFootTruck : 'no price info'}</p>
+            {user && user._id === quote.owner ? ownerButtons : <p>Not editable</p>}
           </Media.Body>
         </Media>
       </Layout>
@@ -101,4 +101,4 @@ class Book extends Component {
   }
 }
 
-export default withRouter(Book)
+export default withRouter(Quote)

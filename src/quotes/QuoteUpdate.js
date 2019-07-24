@@ -3,15 +3,15 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import Layout from './Layout'
-import BookForm from './BookForm'
+import QuoteForm from './QuoteForm'
 import apiUrl from '../apiConfig'
 import { Redirect, withRouter } from 'react-router-dom'
 
-class BookUpdate extends Component {
+class QuoteUpdate extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      book: {
+      quote: {
         title: '',
         author: '',
         originalLanguage: '',
@@ -23,18 +23,18 @@ class BookUpdate extends Component {
 
   componentDidMount () {
     axios({
-      url: `${apiUrl}/books/${this.props.match.params.id}`,
+      url: `${apiUrl}/quotes/${this.props.match.params.id}`,
       method: 'GET',
       headers: {
         'Authorization': `Token token=${this.props.user.token}`
       }
     })
       .then(res => {
-        const dateObj = new Date(res.data.book.firstPublished)
+        const dateObj = new Date(res.data.quote.firstPublished)
         const formattedDate = dateObj.toISOString().substring(0, 10)
         this.setState({
-          book: {
-            ...res.data.book,
+          quote: {
+            ...res.data.quote,
             firstPublished: formattedDate
           }
         })
@@ -48,55 +48,55 @@ class BookUpdate extends Component {
     const updatedField = {
       [event.target.name]: event.target.value
     }
-    // combine the prev object with the book object
-    const editedBook = Object.assign(this.state.book, updatedField)
+    // combine the prev object with the quote object
+    const editedQuote = Object.assign(this.state.quote, updatedField)
     // use setState to update the state with our combined object
-    this.setState({ book: editedBook })
+    this.setState({ quote: editedQuote })
   }
 
   handleSubmit = event => {
     event.preventDefault()
     // on submit - Patch request
     axios({
-      url: `${apiUrl}/books/${this.props.match.params.id}`,
+      url: `${apiUrl}/quotes/${this.props.match.params.id}`,
       method: 'PATCH',
       headers: {
         'Authorization': `Token token=${this.props.user.token}`
       },
       data: {
-        book: this.state.book
+        quote: this.state.quote
       }
     })
       .then(res => this.setState({ edited: true }))
-      .then(() => this.props.alert('Updated book!', 'warning'))
+      .then(() => this.props.alert('Updated quote!', 'warning'))
       .catch(console.error)
   }
 
   render () {
     const { handleChange, handleSubmit } = this
-    const { book, edited } = this.state
-    // const bookId = this.props.match.params.id
+    const { quote, edited } = this.state
+    // const quoteId = this.props.match.params.id
 
     if (edited) {
       return <Redirect to={
         {
-          pathname: `/books/${this.props.match.params.id}`
+          pathname: `/quotes/${this.props.match.params.id}`
         }
       } />
     }
 
     return (
       <Layout>
-        <h3>Edit Book</h3>
-        <BookForm
-          book={book}
+        <h3>Edit Quote</h3>
+        <QuoteForm
+          quote={quote}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
-          cancelPath={`/books/${this.props.match.params.id}`}
+          cancelPath={`/quotes/${this.props.match.params.id}`}
         />
       </Layout>
     )
   }
 }
 
-export default withRouter(BookUpdate)
+export default withRouter(QuoteUpdate)

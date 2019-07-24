@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import apiUrl from '../apiConfig'
-import BookForm from './BookForm'
+import QuoteForm from './QuoteForm'
 import Layout from './Layout'
 
 import axios from 'axios'
 
-class BookCreate extends Component {
+class QuoteCreate extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      book: {
+      quote: {
         title: '',
         author: '',
         originalLanguage: '',
@@ -26,51 +26,51 @@ class BookCreate extends Component {
       [event.target.name]: event.target.value
     }
     // use object to create updated state Object
-    const editedBook = Object.assign(this.state.book, updatedField)
+    const editedBook = Object.assign(this.state.quote, updatedField)
     // finally setState with updates object
-    this.setState({ book: editedBook })
+    this.setState({ quote: editedBook })
   }
 
   handleSubmit = event => {
     event.preventDefault()
 
     axios({
-      url: apiUrl + '/books',
+      url: apiUrl + '/quotes',
       method: 'POST',
       headers: {
         'Authorization': `Token token=${this.props.user.token}`
       },
       data: {
-        book: this.state.book
+        quote: this.state.quote
       }
     })
       .then(res => this.setState({
-        createdBookId: res.data.book._id
+        createdBookId: res.data.quote._id
       }))
-      .then(() => this.props.alert('Created new book!', 'warning'))
+      .then(() => this.props.alert('Created new quote!', 'warning'))
       .catch(console.error)
   }
 
   render () {
     const { handleChange, handleSubmit } = this
-    const { book, createdBookId } = this.state
+    const { quote, createdBookId } = this.state
 
     if (createdBookId) {
-      return <Redirect to={`/books/${createdBookId}`} />
+      return <Redirect to={`/quotes/${createdBookId}`} />
     }
 
     return (
       <Layout md='6' lg='8'>
-        <h4>Create a new book</h4>
-        <BookForm
-          book={book}
+        <h4>Create a new quote</h4>
+        <QuoteForm
+          quote={quote}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
-          cancelPath="/books"
+          cancelPath="/quotes"
         />
       </Layout>
     )
   }
 }
 
-export default BookCreate
+export default QuoteCreate

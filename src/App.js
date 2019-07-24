@@ -10,10 +10,10 @@ import SignUp from './auth/components/SignUp'
 import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
-import Books from './books/Books'
-import Book from './books/Book'
-import BookCreate from './books/BookCreate'
-import BookUpdate from './books/BookUpdate'
+import Quotes from './quotes/Quotes'
+import Quote from './quotes/Quote'
+import QuoteCreate from './quotes/QuoteCreate'
+import QuoteUpdate from './quotes/QuoteUpdate'
 
 import Alert from 'react-bootstrap/Alert'
 
@@ -67,17 +67,17 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/books' render={() => (
-            <Books alert={this.alert} user={user} />
+          <AuthenticatedRoute user={user} exact path='/quotes' render={() => (
+            <Quotes alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/books/:id' render={() => (
-            <Book alert={this.alert} user={user} />
+          <AuthenticatedRoute user={user} exact path='/quotes/:id' render={() => (
+            <Quote alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/create-book' render={() => (
-            <BookCreate alert={this.alert} user={user} />
+          <AuthenticatedRoute user={user} exact path='/create-quote' render={() => (
+            <QuoteCreate alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/books/:id/update-book' render={() => (
-            <BookUpdate alert={this.alert} user={user} />
+          <AuthenticatedRoute user={user} exact path='/quotes/:id/update-quote' render={() => (
+            <QuoteUpdate alert={this.alert} user={user} />
           )} />
         </main>
       </React.Fragment>

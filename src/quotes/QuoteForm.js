@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const BookForm = ({ book, handleSubmit, handleChange, cancelPath }) => (
+const QuoteForm = ({ quote, handleSubmit, handleChange, cancelPath }) => (
   <Form onSubmit={handleSubmit}>
     <Form.Group controlId="title">
       <Form.Label>Title</Form.Label>
@@ -10,7 +10,7 @@ const BookForm = ({ book, handleSubmit, handleChange, cancelPath }) => (
         type="text"
         placeholder="Title"
         name="title"
-        value={book.title}
+        value={quote.title}
         onChange={handleChange}
       />
     </Form.Group>
@@ -20,7 +20,7 @@ const BookForm = ({ book, handleSubmit, handleChange, cancelPath }) => (
         type="text"
         placeholder="Author"
         name="author"
-        value={book.author}
+        value={quote.author}
         onChange={handleChange}
       />
     </Form.Group>
@@ -29,7 +29,7 @@ const BookForm = ({ book, handleSubmit, handleChange, cancelPath }) => (
       <Form.Control
         type="date"
         name="firstPublished"
-        value={book.firstPublished}
+        value={quote.firstPublished}
         onChange={handleChange}
       />
     </Form.Group>
@@ -40,4 +40,4 @@ const BookForm = ({ book, handleSubmit, handleChange, cancelPath }) => (
   </Form>
 )
 
-export default BookForm
+export default QuoteForm

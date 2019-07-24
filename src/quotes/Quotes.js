@@ -5,11 +5,11 @@ import { Table } from 'react-bootstrap'
 import axios from 'axios'
 import apiUrl from '../apiConfig'
 
-class Books extends Component {
+class Quotes extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      books: [],
+      quotes: [],
       loaded: false,
       isDeleted: false,
       error: null
@@ -19,13 +19,13 @@ class Books extends Component {
   async componentDidMount () {
     try {
       const response = await axios({
-        url: apiUrl + '/books',
+        url: apiUrl + '/quotes',
         method: 'GET',
         headers: {
           'Authorization': `Token token=${this.props.user.token}`
         }
       })
-      this.setState({ books: response.data.books, loaded: true })
+      this.setState({ quotes: response.data.quotes, loaded: true })
     } catch (err) {
       console.error(err)
       this.setState({ error: err.message })
@@ -33,16 +33,16 @@ class Books extends Component {
   }
 
   render () {
-    const { books, error, loaded } = this.state
-    const booksList = books.map((book, index) => (
-      <tr key={book._id}>
+    const { quotes, error, loaded } = this.state
+    const quotesList = quotes.map((quote, index) => (
+      <tr key={quote._id}>
         <td>
-          <Link to={`/books/${book._id}`}>{index + 1}</Link>
+          <Link to={`/quotes/${quote._id}`}>{index + 1}</Link>
         </td>
-        <td>{book.title}</td>
-        <td>{book.author}</td>
-        <td>{book.originalLanguage}</td>
-        <td>{book.firstPublished ? book.firstPublished.slice(0, 10) : ''}</td>
+        <td>{quote.pickUpDate}</td>
+        <td>{quote.pickUpLocation}</td>
+        <td>{quote.dropOffLocation}</td>
+        <td>{quote.createdAt.slice(0, 10)}</td>
       </tr>
     ))
 
@@ -50,8 +50,8 @@ class Books extends Component {
       return <p>Loading...</p>
     }
 
-    if (books.length === 0) {
-      return <p>No books</p>
+    if (quotes.length === 0) {
+      return <p>No quotes</p>
     }
 
     if (error) {
@@ -64,14 +64,14 @@ class Books extends Component {
           <thead className="bg-dark text-white-50">
             <tr>
               <th>#</th>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Original Langauge</th>
-              <th>Date Published</th>
+              <th>Pick Up Date</th>
+              <th>Start Location</th>
+              <th>End Location</th>
+              <th>Quoted On</th>
             </tr>
           </thead>
           <tbody>
-            {booksList}
+            {quotesList}
           </tbody>
         </Table>
       </React.Fragment>
@@ -79,4 +79,4 @@ class Books extends Component {
   }
 }
 
-export default Books
+export default Quotes
