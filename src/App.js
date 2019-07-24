@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.scss'
 import { Route } from 'react-router-dom'
 
+import Home from './home/Home'
 import AuthenticatedRoute from './auth/components/AuthenticatedRoute'
 import Header from './header/Header'
 import SubHeader from './header/SubHeader'
@@ -51,6 +52,9 @@ class App extends Component {
           </Alert>
         ))}
         <main className="container">
+          <Route path='/home' render={() => (
+            <Home />
+          )} />
           <Route path='/sign-up' render={() => (
             <SignUp alert={this.alert} setUser={this.setUser} />
           )} />
