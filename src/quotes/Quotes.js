@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Table } from 'react-bootstrap'
+// import Spinner from 'react-bootstrap/Spinner'
 
 import axios from 'axios'
 import apiUrl from '../apiConfig'
@@ -47,6 +48,7 @@ class Quotes extends Component {
     ))
 
     if (!loaded) {
+      // <Spinner animation="border" variant="primary" />
       return <p>Loading...</p>
     }
 

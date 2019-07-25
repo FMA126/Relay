@@ -8,7 +8,7 @@ const authenticatedOptionsResource = (
       <Nav.Link href="#quotes">All Quotes</Nav.Link>
     </Nav.Item>
     <Nav.Item>
-      <Nav.Link href="#create-quote">Create A Quote</Nav.Link>
+      <Nav.Link href="#create-quote">New Quote</Nav.Link>
     </Nav.Item>
   </React.Fragment>
 )

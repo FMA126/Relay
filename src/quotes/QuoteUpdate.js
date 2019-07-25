@@ -12,10 +12,9 @@ class QuoteUpdate extends Component {
     super(props)
     this.state = {
       quote: {
-        title: '',
-        author: '',
-        originalLanguage: '',
-        firstPublished: ''
+        pickUpLocation: '',
+        dropOffLocation: '',
+        pickUpDate: ''
       },
       edited: false
     }
@@ -30,12 +29,12 @@ class QuoteUpdate extends Component {
       }
     })
       .then(res => {
-        const dateObj = new Date(res.data.quote.firstPublished)
+        const dateObj = new Date(res.data.quote.pickUpDate)
         const formattedDate = dateObj.toISOString().substring(0, 10)
         this.setState({
           quote: {
             ...res.data.quote,
-            firstPublished: formattedDate
+            pickUpDate: formattedDate
           }
         })
       })
@@ -68,8 +67,8 @@ class QuoteUpdate extends Component {
       }
     })
       .then(res => this.setState({ edited: true }))
-      .then(() => this.props.alert('Updated quote!', 'warning'))
-      .catch(console.error)
+      .then(() => this.props.alert('Updated quote! Check back in 30 secsonds.', 'success'))
+      .catch(() => this.props.alert('Whoops, something went wrong. Check zip.', 'danger'))
   }
 
   render () {
@@ -80,7 +79,7 @@ class QuoteUpdate extends Component {
     if (edited) {
       return <Redirect to={
         {
-          pathname: `/quotes/${this.props.match.params.id}`
+          pathname: '/'
         }
       } />
     }

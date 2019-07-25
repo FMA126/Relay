@@ -6,8 +6,6 @@ import axios from 'axios'
 import Layout from './Layout'
 import apiUrl from '../apiConfig'
 
-// import Layout from '../shared/Layout'
-
 class Quote extends Component {
   constructor (props) {
     super(props)
@@ -28,13 +26,15 @@ class Quote extends Component {
         }
       })
       const options = {
-        month: 'long',
+        month: 'numeric',
         day: 'numeric',
         year: 'numeric'
       }
-      const dateObj = new Date(response.data.quote.firstPublished)
+      const dateObj = new Date(response.data.quote.pickUpDate)
+      const dateObj2 = new Date(response.data.quote.createdAt)
       const formattedDate = dateObj.toLocaleDateString(undefined, options)
-      this.setState({ quote: { ...response.data.quote, firstPublished: formattedDate }, loaded: true })
+      const formattedDate2 = dateObj2.toLocaleDateString(undefined, options)
+      this.setState({ quote: { ...response.data.quote, pickUpDate: formattedDate, createdAt: formattedDate2 }, loaded: true })
     } catch (err) {
       console.error(err)
       this.setState({ error: err.message })
@@ -57,13 +57,14 @@ class Quote extends Component {
 
   render () {
     const { quote, error, deleted } = this.state
-    const { user } = this.props
     const ownerButtons = (
       <div>
         <Button onClick={this.destroy} className='mr-2' variant='danger'>Delete</Button>
         <Link to={`/quotes/${this.props.match.params.id}/update-quote`}><Button>Edit</Button></Link>
       </div>
     )
+
+    // quote.createdAt.slice(0, 10).split('/').reverse().join('/')
 
     if (deleted) {
       // custom object in Redirect. 'state' can be named something else
@@ -83,17 +84,17 @@ class Quote extends Component {
             width={64}
             height={64}
             className="mr-3"
-            src={'nothing'}
+            src={'https://www.uhaul.com/reservations/images/Equipment/Trucks/26Medium.png'}
             alt="Generic placeholder"
           />
           <Media.Body>
             <h2>{`${quote.pickUpLocation} to ${quote.dropOffLocation}`}</h2>
             <h4>{quote.pickUpDate}</h4>
-            <p>Date Quoted: {quote.createdAt.slice(0, 10)}</p>
+            <p>Date Quoted: {quote.createdAt}</p>
             <p>Uhaul Prices: {quote.prices[0] ? quote.prices[0].uhaul.tenFootTruck : 'no price info'}</p>
             <p>Budget Prices: {quote.prices[1] ? quote.prices[1].budget.twelveFootTruck : 'no price info'}</p>
             <p>Penske Prices: {quote.prices[2] ? quote.prices[2].penske.twelveFootTruck : 'no price info'}</p>
-            {user && user._id === quote.owner ? ownerButtons : <p>Not editable</p>}
+            {ownerButtons}
           </Media.Body>
         </Media>
       </Layout>

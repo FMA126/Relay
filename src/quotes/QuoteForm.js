@@ -2,35 +2,56 @@ import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+let today = new Date()
+let dd = today.getDate()
+
+let mm = today.getMonth() + 1
+const yyyy = today.getFullYear()
+if (dd < 10) {
+  dd = '0' + dd
+}
+
+if (mm < 10) {
+  mm = '0' + mm
+}
+
+today = yyyy + '-' + mm + '-' + dd
+
 const QuoteForm = ({ quote, handleSubmit, handleChange, cancelPath }) => (
   <Form onSubmit={handleSubmit}>
-    <Form.Group controlId="title">
-      <Form.Label>Title</Form.Label>
+    <Form.Group controlId="pickUpLocation">
+      <Form.Label>Start Location</Form.Label>
       <Form.Control
-        type="text"
-        placeholder="Title"
-        name="title"
-        value={quote.title}
+        type="number"
+        max="99999"
+        placeholder="Zip"
+        name="pickUpLocation"
+        value={quote.pickUpLocation}
         onChange={handleChange}
+        required
       />
     </Form.Group>
-    <Form.Group controlId="author">
-      <Form.Label>Author</Form.Label>
+    <Form.Group controlId="dropOffLocation">
+      <Form.Label>Drop Off Location</Form.Label>
       <Form.Control
-        type="text"
-        placeholder="Author"
-        name="author"
-        value={quote.author}
+        type="number"
+        max="99999"
+        placeholder="Zip"
+        name="dropOffLocation"
+        value={quote.dropOffLocation}
         onChange={handleChange}
+        required
       />
     </Form.Group>
-    <Form.Group controlId="date">
+    <Form.Group controlId="pickUpDate">
       <Form.Label>Date</Form.Label>
       <Form.Control
         type="date"
-        name="firstPublished"
-        value={quote.firstPublished}
+        name="pickUpDate"
+        min={today}
+        value={quote.pickUpDate}
         onChange={handleChange}
+        required
       />
     </Form.Group>
     <Button className="mr-2" type="submit">Submit</Button>

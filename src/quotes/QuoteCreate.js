@@ -11,12 +11,11 @@ class QuoteCreate extends Component {
     super(props)
     this.state = {
       quote: {
-        title: '',
-        author: '',
-        originalLanguage: '',
-        firstPublished: ''
+        pickUpLocation: '',
+        dropOffLocation: '',
+        pickUpDate: ''
       },
-      createdBookId: null
+      createdQuote: false
     }
   }
 
@@ -26,14 +25,13 @@ class QuoteCreate extends Component {
       [event.target.name]: event.target.value
     }
     // use object to create updated state Object
-    const editedBook = Object.assign(this.state.quote, updatedField)
+    const editedQuote = Object.assign(this.state.quote, updatedField)
     // finally setState with updates object
-    this.setState({ quote: editedBook })
+    this.setState({ quote: editedQuote })
   }
 
   handleSubmit = event => {
     event.preventDefault()
-
     axios({
       url: apiUrl + '/quotes',
       method: 'POST',
@@ -45,18 +43,18 @@ class QuoteCreate extends Component {
       }
     })
       .then(res => this.setState({
-        createdBookId: res.data.quote._id
+        createdQuote: true
       }))
-      .then(() => this.props.alert('Created new quote!', 'warning'))
-      .catch(console.error)
+      .then(() => this.props.alert('Creating new quote! Please check back in 30 seconds', 'success'))
+      .catch(() => this.props.alert('Whoops, something went wrong. Check zip.', 'danger'))
   }
 
   render () {
     const { handleChange, handleSubmit } = this
-    const { quote, createdBookId } = this.state
+    const { quote, createdQuote } = this.state
 
-    if (createdBookId) {
-      return <Redirect to={`/quotes/${createdBookId}`} />
+    if (createdQuote) {
+      return <Redirect to={{ pathname: '/' }} />
     }
 
     return (
