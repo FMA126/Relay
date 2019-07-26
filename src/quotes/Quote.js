@@ -86,6 +86,19 @@ class Quote extends Component {
       </div>
     )
 
+    // const quoteBody = (quote) => (
+    //   <React.Fragment>
+    //     <tr>
+    //       <td>{Object.keys(quote.prices[0])}</td>
+    //       <td>{quote.pickUpDate}</td>
+    //       <td>{quote.pickUpLocation}</td>
+    //       <td>{quote.dropOffLocation}</td>
+    //       <td>{quote.createdAt}</td>
+    //       <td>{}
+    //     </tr>
+    //   <React.Fragment>
+    // ))
+
     // quote.createdAt.slice(0, 10).split('/').reverse().join('/')
 
     if (deleted) {
@@ -125,7 +138,7 @@ class Quote extends Component {
             <h4>Penske Prices:</h4>
             <p>12 ft truck: {quote.prices[2] ? quote.prices[2].penske ? quote.prices[2].penske.twelveFootTruck : 'no price info' : 'no price info'}</p>
             <p>12 ft truck: {quote.prices[2] ? quote.prices[2].penske ? quote.prices[2].penske.sixteenFootTruck : 'no price info' : 'no price info'}</p>
-            <p>12 ft truck: {quote.prices[2] ? quote.prices[2].penske ? quote.prices[2].penske.twentyTwoFootTruck : 'no price info' : 'no price info'}</p>
+            <p>12 ft truck: {quote.prices[2] ? quote.prices[2].penske ? quote.prices[2].penske.twentyTwoFootTruck : 'no price info' : 'no price info'}</p>s
             <p>12 ft truck: {quote.prices[2] ? quote.prices[2].penske ? quote.prices[2].penske.twentySixFootTruck : 'no price info' : 'no price info'}</p>
 
             {ownerButtons}
