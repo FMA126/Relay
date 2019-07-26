@@ -111,18 +111,18 @@ class Quote extends Component {
           />
           <Media.Body>
             <h2>{`${quote.pickUpLocation} to ${quote.dropOffLocation}`}</h2>
-            <h4>{quote.pickUpDate}</h4>
-            <p>Date Quoted: {quote.createdAt}</p>
-            <p>Uhaul Prices:</p>
+            <h4>Pick up date: {quote.pickUpDate}</h4>
+            <p>Date quoted: {quote.createdAt}</p>
+            <h4>Uhaul Prices:</h4>
             <p> 10 ft truck: {quote.prices[0] ? quote.prices[0].uhaul ? quote.prices[0].uhaul.tenFootTruck : 'no price info' : 'no price info'}</p>
             <p> 15 ft truck: {quote.prices[0] ? quote.prices[0].uhaul ? quote.prices[0].uhaul.fifteenFootTruck : 'no price info' : 'no price info'}</p>
             <p> 20 ft truck: {quote.prices[0] ? quote.prices[0].uhaul ? quote.prices[0].uhaul.twentyFootTruck : 'no price info' : 'no price info'}</p>
             <p> 26 ft truck: {quote.prices[0] ? quote.prices[0].uhaul ? quote.prices[0].uhaul.twentySixFootTruck : 'no price info' : 'no price info'}</p>
-            <p>Budget Prices:</p>
+            <h4>Budget Prices:</h4>
             <p>12 ft truck: {quote.prices[1] ? quote.prices[1].budget ? quote.prices[1].budget.twelveFootTruck : 'no price info' : 'no price info'}</p>
             <p>16 ft truck: {quote.prices[1] ? quote.prices[1].budget ? quote.prices[1].budget.sixteenFootTruck : 'no price info' : 'no price info'}</p>
             <p>26 ft truck: {quote.prices[1] ? quote.prices[1].budget ? quote.prices[1].budget.twentySixFootTruck : 'no price info' : 'no price info'}</p>
-            <p>Penske Prices:</p>
+            <h4>Penske Prices:</h4>
             <p>12 ft truck: {quote.prices[2] ? quote.prices[2].penske ? quote.prices[2].penske.twelveFootTruck : 'no price info' : 'no price info'}</p>
             <p>12 ft truck: {quote.prices[2] ? quote.prices[2].penske ? quote.prices[2].penske.sixteenFootTruck : 'no price info' : 'no price info'}</p>
             <p>12 ft truck: {quote.prices[2] ? quote.prices[2].penske ? quote.prices[2].penske.twentyTwoFootTruck : 'no price info' : 'no price info'}</p>
