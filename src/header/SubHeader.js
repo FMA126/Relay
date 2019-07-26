@@ -15,7 +15,7 @@ const authenticatedOptionsResource = (
 
 const unAuthenticatedOptionsResource = (
   <Nav.Item>
-    <Nav.Item>Icon</Nav.Item>
+    <Nav.Item>Compare Moving Truck Prices</Nav.Item>
   </Nav.Item>
 )
 // <nav className="nav nav-dark">

@@ -25,11 +25,11 @@ const alwaysOptions = (
 
 const Header = ({ user }) => (
   <header className="main-header">
-    <h1>Book Before You Leap</h1>
+    <h1>Relay</h1>
     <nav>
+      { alwaysOptions }
       { user && <span>Welcome, {user.email}</span>}
       { user ? authenticatedOptions : unauthenticatedOptions }
-      { alwaysOptions }
     </nav>
   </header>
 )
