@@ -138,7 +138,7 @@ class Quote extends Component {
             <h4>Penske Prices:</h4>
             <p>12 ft truck: {quote.prices[2] ? quote.prices[2].penske ? quote.prices[2].penske.twelveFootTruck : 'no price info' : 'no price info'}</p>
             <p>16 ft truck: {quote.prices[2] ? quote.prices[2].penske ? quote.prices[2].penske.sixteenFootTruck : 'no price info' : 'no price info'}</p>
-            <p>20 ft truck: {quote.prices[2] ? quote.prices[2].penske ? quote.prices[2].penske.twentyTwoFootTruck : 'no price info' : 'no price info'}</p>s
+            <p>20 ft truck: {quote.prices[2] ? quote.prices[2].penske ? quote.prices[2].penske.twentyTwoFootTruck : 'no price info' : 'no price info'}</p>
             <p>26 ft truck: {quote.prices[2] ? quote.prices[2].penske ? quote.prices[2].penske.twentySixFootTruck : 'no price info' : 'no price info'}</p>
 
             {ownerButtons}
