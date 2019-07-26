@@ -6,6 +6,11 @@ The app is designed to provide an easy way for users to compare rental truck pri
 ### Relevant Links
 Frontend deployed: https://fma126.github.io/Relay/ Backend repo: https://github.com/FMA126/relay-api Backend deployed: https://secret-depths-15843.herokuapp.com/
 
+### Installation Instructions
+1. Fork and clone
+2. npm install
+3. change homepage to your github repo in package.json
+
 ### Technologies Used
 React
 Bootstrap
@@ -19,6 +24,9 @@ Cheerio
 ![wireframe](https://media.git.generalassemb.ly/user/20342/files/69e50c80-ac5f-11e9-9c00-b0fbec52c3db)
 
 ![wireframe](https://media.git.generalassemb.ly/user/20342/files/78332880-ac5f-11e9-8d4a-76c4866fa706)
+
+### Screenshot
+![relay app](/src/Relay.png)
 
 
 
